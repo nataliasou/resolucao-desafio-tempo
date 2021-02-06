@@ -1,0 +1,62 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<section class="container " style="height:340px">
+    <div class="mx-auto my-5">
+        <form method="GET" class="row align-items-center">
+            <div class="form-label-group col-8 mt-5">
+                <input type="text" name="search_bar" placeholder="Barreiras, Bahia"
+                       class="form-control form-control-lg">
+            </div>
+            <div class="form-label-group col-2 mt-5">
+                <button type="submit" class="btn btn-light">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+
+    {% if resultado.request %}
+    <br>
+    <center><font color="white">
+        <div class="card text-center bg-info border-light">
+            <div class="card-body">
+                <h3 class="card-title">{{ resultado.location.name }}, {{ resultado.location.region }}, {{
+                    resultado.location.country }}</h3>
+                <h2 class="card-text"><img src="{{ resultado.current.weather_icons.0 }}" class="rounded-circle"> {{
+                    resultado.current.temperature }}°C</h2>
+                <h4 class="card-text">Sensação térmica: {{ resultado.current.feelslike }}°C</h4>
+                <br>
+                <table cellpadding="15" align="center">
+                    <tr>
+                        <td><h5 class="card-text">Velocidade do Vento: {{ resultado.current.wind_speed }} km/h</h5></td>
+                        <td><h5 class="card-text">Precipitação: {{ resultado.current.precip }}%</h5></td>
+                    </tr>
+                    <tr>
+                        <td><h5 class="card-text">Direção do vento: {{ resultado.current.wind_dir }}</h5></td>
+                        <td><h5 class="card-text">Umidade: {{ resultado.current.humidity }}%</h5></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="card-footer border-light">
+                Horário de observação: {{ resultado.current.observation_time }}
+            </div>
+        </div>
+    </font></center>
+    {% else %}
+    {% if resultado.success == False %}
+    {% if resultado.error.code == 101 %}
+    <p class="lead" align="center"><font color="white">Ops! Verifique o seu token de acesso a API</font></p>
+    {% elif resultado.error.code == 615 %}
+    <p class="lead" align="center"><font color="white">Ops! Algo deu errado, por favor verifique o nome que você
+        digitou.</font></p>
+    {% elif resultado.error.code == 602 %}
+    <p class="lead" align="center"><font color="white">Ops! Não temos dados da cidade digitada.</font></p>
+    {% elif resultado.error.code == 601 %}
+    <p class="lead" align="center"><font color="white">Digite o nome da cidade que você deseja saber o clima.</font></p>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    <div class="card-footer text-muted">
+        <font color="white">made by Natália Souza</font>
+    </div>
+</section>
+{% endblock %}
