@@ -21,9 +21,11 @@ copie o seu token e siga os seguintes passos:
 
 ```bash
 # Abra o projeto no editor
+# É necessário ter o Django instalado, se não tiver, use o comando:
+pip3 install django~=2.2
 
 # Acesse a pasta api e depois abra o arquivo views.py, coloque seu token na linha 9:
-'access_key': 'MEU_TOKEN',
+'access_key': 'SEU_TOKEN',
 
 # Migre o banco
 py manage.py makemigrations
@@ -35,3 +37,9 @@ py manage.py runserver
 # Acesse a aplicação
 http://127.0.0.1:8000/
 ```
+
+### 🛠 Tecnologias utilizadas
+
+- [Bootstrap](https://getbootstrap.com/)
+- [Django](https://docs.djangoproject.com/en/3.1/)
+- [Python](https://www.python.org/)
